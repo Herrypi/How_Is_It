@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 function AppHeader() {
   const navigate = useNavigate();
-  //asdasda
 
   const goToMain = () => {
     navigate("/");
@@ -19,6 +18,13 @@ function AppHeader() {
     navigate("/viewmorepage");
   };
 
+  const goToRegister = () => {
+    navigate("/Register");
+  };
+  const goToOrdered = () => {
+    navigate("/Ordered");
+  };
+
   return (
     <Wrapper>
       <Icons>
@@ -29,7 +35,7 @@ function AppHeader() {
           <Search>
             <FaSearch />
           </Search>
-          <Reserved>예약내역</Reserved>
+          <Reserved onClick={goToOrdered}>예약내역</Reserved>
           <Moreanything onClick={goToEvent}>더보기</Moreanything>
           <Login onClick={goToLogin}>로그인</Login>
         </Mypage>
