@@ -10,7 +10,7 @@ import MainPage from './components/MainPage/MainPage';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import ViewMorePage from './components/ViewMorePage/ViewMorePage';
-
+import RoomListPage from './components/RoomListPage/RoomListPage';
 class App extends Component {
   render() {
     return(
@@ -21,6 +21,7 @@ class App extends Component {
         <Route exact path="/login" element={<LoginPage />} />
         <Route exact path="/register" element={<RegisterPage />} />
         <Route exact path="/viewmorepage" element={<ViewMorePage/>}/>
+        <Route exact path="/roomlistpage" element={<RoomListPage/>}/>
       </Routes>
     </Router>
     </div>

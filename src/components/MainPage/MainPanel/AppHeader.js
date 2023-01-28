@@ -54,12 +54,12 @@ margin: 10px 230px;
 `;
 
 const Logo = styled.div`
-font-size: 30px;
 cursor: pointer;
-margin-left: 100px;
+display: flex;
+justify-content:center;
 img{
-    width: 110px;
-    height 40px;
+    width: 120px;
+    height: 40px;
     object-fit: cover;
 }
 `;
@@ -68,7 +68,6 @@ const Mypage = styled.div`
 display: flex;
 font-size: 20px;
 color: rgb(213, 212, 212);
-margin-right:100px;
 
 `;
 

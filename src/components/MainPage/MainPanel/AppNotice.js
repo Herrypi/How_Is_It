@@ -12,7 +12,7 @@ function AppNotice() {
 
   return (
     <div>
-      <Banner onClick={goToEvent}><img src="images/event.png" /></Banner>
+      <Banner onClick={goToEvent}><img src="images/event.png" alt=""/></Banner>
     </div>
   );
 }
