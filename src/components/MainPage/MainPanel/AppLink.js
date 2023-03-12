@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 function AppLink() {
 
@@ -14,17 +14,17 @@ function AppLink() {
     <div>
       <Link>
       
-          <img src='images/motel.png'/>
+          <img src='images/motel.png'alt=''/>
         
-          <Hotel onClick={goToRoomlist}><img src='images/hotel.png'/> </Hotel>
+          <Hotel onClick={goToRoomlist}><img src='images/hotel.png'alt=''/> </Hotel>
         
-          <img src='images/pention.png'/>
+          <img src='images/pention.png' alt=''/>
         
-          <img src='images/guesthouse.png'/>
+          <img src='images/guesthouse.png'alt=''/>
         
-          <img src='images/camping.png'/>
+          <img src='images/camping.png'alt=''/>
         
-          <img src='images/travel.png'/>
+          <img src='images/travel.png'alt=''/>
         
       </Link>
     </div>

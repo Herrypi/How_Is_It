@@ -1,5 +1,4 @@
 import React from "react";
-import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -15,8 +14,6 @@ function LoginPage() {
   return (
     <Wrapper>
       <Title>
-        {" "}
-        Title 컴포넌트 LoginPage
         <Link to="/">
           <img className="logo" src="/images/logo/logo.png" alt="logo" />
         </Link>
@@ -25,9 +22,6 @@ function LoginPage() {
       <Logo onClick={goToMain}>
         <img src="images/logo.png" alt="logo" />
       </Logo>
-      <br></br>
-      <br></br>
-      <hr></hr>
 
       <LoginBetter>
         
@@ -52,11 +46,6 @@ function LoginPage() {
         <LoginBtn >로그인</LoginBtn>
         <ToSignUP onClick={goToRegister}>회원가입</ToSignUP>
       </LoginBetter>
-      <br></br>
-      <hr></hr>
-      <Kakao>
-        <img src="/images/kakao_login.png" alt="kakaoLogin" />
-      </Kakao>
     </Wrapper>
   );
 }
@@ -72,6 +61,8 @@ const Wrapper = styled.section`
   width: 100vw;
   height: 70px;
   padding: auto;
+  margin-bottom: 500px;
+
 `;
 
 const Logo = styled.div`
@@ -92,16 +83,6 @@ const Title = styled.div`
 
   .logo {
     width: 170px;
-  }
-`;
-
-const Kakao = styled.button`
-  margin-top: 20px;
-  background: rgb(253, 220, 63);
-
-  img {
-    width: 450px;
-    height: 85px;
   }
 `;
 

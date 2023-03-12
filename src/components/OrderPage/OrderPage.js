@@ -1,7 +1,5 @@
-import React,{ useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useLocation } from 'react-router';
-import { useHistory } from 'react-router';
 
 // 결재페이지
 

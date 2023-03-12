@@ -10,15 +10,19 @@ function RoomListPage() {
     <Wrapper>
       <AppHeader />
       <RoomListMainPanel />
-      <Div>
-        <OptionInfo />
-      </Div>
-      <Div2>
-        <FilterInfo />
-      </Div2>
-      <Div3>
-        <RoomInfo />
-      </Div3>
+      <Container>
+        <Div>
+          <OptionInfo />
+        </Div>
+
+        <Div2>
+          <FilterInfo />
+        </Div2>
+
+        <Div3>
+          <RoomInfo />
+        </Div3>
+      </Container>
     </Wrapper>
   )
 }
@@ -38,4 +42,10 @@ float: none;
 const Div3 = styled.div`
 display: block;
 float: inline-start;`;
+
+const Container = styled.div`
+width: 1200px;
+height: 1000px;
+margin-left: 200px;
+`;
 
