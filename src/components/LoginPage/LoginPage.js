@@ -1,195 +1,127 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/actions/userActions';
+
 function LoginPage() {
+  const dispatch = useDispatch();
+  const BASE_URL = 'http://52.79.41.0:8080/user/sign-in';
+  const [formValues, setFormValues] = useState({
+    email: '',
+    password: '',
+  });
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
-  const goToMain = () => {
-    navigate("/");
+  const handleChange = (e) => {
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value,
+    });
   };
-  const goToRegister = () => {
-    navigate("/Register");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post(BASE_URL, formValues)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(login(response.data));
+          return navigate('/');
+        }
+      })
+      .catch((error) => {
+        setErrors(error.response.data);
+      });
   };
+
   return (
-    <Wrapper>
-      <Title>
-        <Link to="/">
-          <img className="logo" src="/images/logo/logo.png" alt="logo" />
-        </Link>
-      </Title>
-
-      <Logo onClick={goToMain}>
-        <img src="images/logo.png" alt="logo" />
-      </Logo>
-
-      <LoginBetter>
-        
-        <Divide></Divide>
-        <InputDiv>
-          
-          <Input
-            //onChange={idInput} // idInput기능 어케하지
-            type="email"
-            placeholder="이메일 주소"
-            name="id"
-          ></Input>
-          <Input
-            //onChange={pwInput} // pwInput기능 어케하지
-            type="password"
-            placeholder="비밀번호"
-            name="pw"
-          ></Input>
-        </InputDiv>
-        {/* <LoginBtn onClick={goToLogin}>로그인</LoginBtn>
-        <ToSignUP onClick={goToSignUp}>회원가입</ToSignUP> */}
-        <LoginBtn >로그인</LoginBtn>
-        <ToSignUP onClick={goToRegister}>회원가입</ToSignUP>
-      </LoginBetter>
-    </Wrapper>
+    <FormContainer onSubmit={handleSubmit}>
+      <Header>
+        <Logo>로그인</Logo>
+      </Header>
+      <InputContainer>
+        <Label htmlFor="email">이메일</Label>
+        <Input
+          type="email"
+          id="email"
+          name="email"
+          value={formValues.email}
+          onChange={handleChange}
+          required
+        />
+        {errors.email && <span>{errors.email}</span>}
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor="password">비밀번호</Label>
+        <Input
+          type="password"
+          id="password"
+          name="password"
+          value={formValues.password}
+          onChange={handleChange}
+          required
+        />
+        {errors.password && <span>{errors.password}</span>}
+      </InputContainer>
+      <button type="submit">로그인</button>
+    </FormContainer>
   );
 }
 
 export default LoginPage;
-const Wrapper = styled.section`
-  ${(props) => props.theme.flexVertical};
-  display: center;
+
+const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  margin-top: 100px;
+`;
+
+const Header = styled.div`
+  display: center;
   position: fixed;
   top: 0;
-  z-index: 999;
   width: 100vw;
   height: 70px;
   padding: auto;
-  margin-bottom: 500px;
-
+  background-color: #f7323f;
 `;
 
 const Logo = styled.div`
-font-size: 30px;
-cursor: pointer;
-margin-top:100px;
-img{
-    width: 150px;
-    height 50px;
-    object-fit: cover;
-}
-`;
-
-const Title = styled.div`
+  font-weight: bolder;
+  margin-top: 10px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .logo {
-    width: 170px;
-  }
-`;
-
-const LoginBetter = styled.div`
-  align-items: center;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Divide = styled.p`
-  &::after {
-    content: "";
-    position: absolute;
-    top: 30px;
-    width: 450px;
-    height: 1px;
-  }
-`;
-const InputDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 70px 0 30px 0;
-`;
-const Input = styled.input`
-  padding: 0 12px;
-  margin-bottom: 30px;
-  width: 450px;
-  height: 70px;
-  border: 1px solid ${(props) => props.theme.borderGray};
-  font-size: 24px;
-  cursor: text;
-  border-radius: 6px;
-
-  &:focus {
-    outline: none;
-  }
-  &::placeholder {
-    color: ${(props) => props.theme.middleGray};
-    font-size: 20px;
-  }
-`;
-const LoginBtn = styled.button`
-  width: 450px;
-  height: 70px;
-  background-color: red;
-  border-radius: 6px;
-  font-size: 23px;
   color: white;
+  font-size: 30px;
+  position: absolute;
+  left: 20%;
 `;
 
-const ToSignUP = styled.button`
-  width: 450px;
-  height: 70px;
-  color: black;
-  background: none;
-  text-decoration: none;
-  margin-top: 20px;
-  text-align: center;
-  font-size: 20px;
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 400px;
 `;
-// const Moreanything = styled.div`
-//   padding: 10px;
-//   cursor: default;
 
-//   span {
-//     font-weight: bolder;
-//   }
-//   &:hover {
-//     color: white;
-//   }
-// `;
+const Label = styled.label`
+  display: flex;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: gray;
+  font-weight: bolder;
+`;
 
-// const Search = styled.div`
-//   padding: 10px;
-//   margin-right: 10px;
-// `;
-
-// const Mypage = styled.div`
-//   display: flex;
-//   font-size: 20px;
-//   color: rgb(213, 212, 212);
-//   margin-right: 100px;
-// `;
-
-// const Reserved = styled.div`
-//   padding: 10px;
-//   cursor: pointer;
-//   margin-right: 10px;
-//   &:hover {
-//     color: white;
-//   }
-// `;
-// const Login = styled.div`
-//   padding: 10px;
-//   margin: 0 20px;
-//   cursor: pointer;
-//   position: relative;
-//   display: flex;
-//   flex-direction: column;
-//   &:hover {
-//     color: white;
-//   }
-// `;
-
-// const Icons = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   margin: 10px 230px;
-// `;
+const Input = styled.input`
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid gray;
+  border-radius: 0.3rem;
+  width: 100%;
+  margin-top: 0.5rem;
+  border-color: #fb055`;
